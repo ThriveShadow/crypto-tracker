@@ -58,14 +58,12 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                     return null;
                   },
                   onSaved: (value) {
-
                     _name = value!;
                   },
                 ),
                 const SizedBox(height: 16),
                 const Text('Quantity'),
                 const SizedBox(height: 3),
-
                 Row(
                   children: [
                     Expanded(
@@ -73,11 +71,11 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
-                            decoration: const InputDecoration(
-                            ),
+                            decoration: const InputDecoration(),
                             keyboardType: TextInputType.number,
                             validator: (value) {
-                              if (value == null || double.tryParse(value) == null) {
+                              if (value == null ||
+                                  double.tryParse(value) == null) {
                                 return 'Invalid quantity.';
                               }
                               return null;
@@ -92,8 +90,8 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: DropdownButtonFormField<Category>(
-                        decoration: const InputDecoration(
-                        ),
+                        decoration: const InputDecoration(),
+                        isExpanded: true,
                         items: _categories.map((category) {
                           return DropdownMenuItem(
                             value: category,
@@ -127,10 +125,7 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-
-                const Text(
-                  'Buy Price'
-                ),
+                const Text('Buy Price'),
                 TextFormField(
                   decoration: const InputDecoration(),
                   keyboardType: TextInputType.number,
@@ -145,7 +140,6 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                   },
                 ),
                 const SizedBox(height: 32),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
