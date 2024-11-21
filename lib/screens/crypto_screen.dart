@@ -103,7 +103,12 @@ class _AddCryptoScreenState extends State<AddCryptoScreen> {
                                   color: category.color,
                                   margin: const EdgeInsets.only(right: 8),
                                 ),
-                                Text(category.title),
+                                Expanded(
+                                  child: Text(
+                                    category.title,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                               ],
                             ),
                           );
