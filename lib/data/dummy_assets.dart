@@ -21,10 +21,4 @@ final myDummyAssets = [
       quantity: 1000,
       buyPrice: 1,
       category: categories[Categories.meme]!),
-  MyAsset(
-      id: '4',
-      name: 'SHIB',
-      quantity: 1000000,
-      buyPrice: 0.0000000001,
-      category: categories[Categories.meme]!),
 ];

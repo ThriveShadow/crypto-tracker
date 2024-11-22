@@ -25,31 +25,58 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  List<MyAsset> _combineAssets(List<MyAsset> assets) {
+    final Map<String, MyAsset> combinedMap = {};
+
+    for (var asset in assets) {
+      if (combinedMap.containsKey(asset.name)) {
+        final existing = combinedMap[asset.name]!;
+        final totalQuantity = existing.quantity + asset.quantity;
+        final avgPrice = ((existing.buyPrice * existing.quantity) +
+                (asset.buyPrice * asset.quantity)) /
+            totalQuantity;
+        combinedMap[asset.name] = MyAsset(
+          id: existing.id,
+          name: asset.name,
+          quantity: totalQuantity,
+          buyPrice: avgPrice,
+          category: asset.category,
+        );
+      } else {
+        combinedMap[asset.name] = asset;
+      }
+    }
+
+    return combinedMap.values.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final combinedAssets = _combineAssets(_assetList);
+
     Widget content = const Center(
       child: Text(
         'No data',
       ),
     );
 
-    if (_assetList.isNotEmpty) {
+    if (combinedAssets.isNotEmpty) {
       content = ListView.builder(
-        itemCount: _assetList.length,
+        itemCount: combinedAssets.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(_assetList[index].name),
-            subtitle: Text('${_assetList[index].quantity} units'),
+            title: Text(combinedAssets[index].name),
+            subtitle: Text('${combinedAssets[index].quantity} units'),
             leading: Container(
               width: 24,
               height: 24,
-              color: _assetList[index].category.color,
+              color: combinedAssets[index].category.color,
             ),
             trailing: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const Text('Average Price'),
-                Text('\$${_assetList[index].buyPrice.toStringAsFixed(2)}'),
+                Text('\$${combinedAssets[index].buyPrice.toStringAsFixed(2)}'),
               ],
             ),
           );
